@@ -1,5 +1,5 @@
+import { ENV } from "@/constants/env.js";
 import pino from "pino";
-
 export const logger = pino({
 	transport: {
 		target: "pino-pretty",
@@ -9,5 +9,5 @@ export const logger = pino({
 			ignore: "pid,hostname",
 		},
 	},
-	level: process.env.LOG_LEVEL || "info",
+	level: ENV.log_level || "info",
 });

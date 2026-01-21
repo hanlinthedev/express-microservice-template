@@ -1,8 +1,9 @@
+import { ENV } from "@/constants/env.js";
 import { logger } from "@/infra/logger.js";
 import os from "os";
 
-const CONSUL_HOST = process.env.CONSUL_HOST || "127.0.0.1";
-const CONSUL_PORT = Number(process.env.CONSUL_PORT) || 8500;
+const CONSUL_HOST = ENV.consul_host || "127.0.0.1";
+const CONSUL_PORT = Number(ENV.consul_port) || 8500;
 const CONSUL_BASE = `http://${CONSUL_HOST}:${CONSUL_PORT}`;
 
 type RegisterOpts = {
@@ -44,9 +45,9 @@ export async function registerService(opts: RegisterOpts) {
 	const checkHttp = `http://${address}:${opts.port}/health`;
 	body.Check = {
 		HTTP: checkHttp,
-		Interval: opts.checkInterval || process.env.CONSUL_CHECK_INTERVAL || "10s",
+		Interval: opts.checkInterval || ENV.consul_check_interval || "10s",
 		DeregisterCriticalServiceAfter:
-			opts.deregisterAfter || process.env.CONSUL_DEREGISTER_AFTER || "1m",
+			opts.deregisterAfter || ENV.consul_deregister_after || "1m",
 	};
 
 	try {

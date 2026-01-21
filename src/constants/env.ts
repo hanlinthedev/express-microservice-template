@@ -1,0 +1,17 @@
+export const ENV = {
+	node_env: process.env.NODE_ENV,
+	port: process.env.PORT,
+	log_level: process.env.LOG_LEVEL,
+	consul_host: process.env.CONSUL_HOST,
+	consul_port: process.env.CONSUL_PORT,
+	consul_service_name: process.env.CONSUL_SERVICE_NAME,
+	consul_check_interval: process.env.CONSUL_CHECK_INTERVAL,
+	consul_deregister_after: process.env.CONSUL_DEREGISTER_AFTER,
+	consul_service_ports: process.env.CONSUL_SERVICE_PORTS,
+	database_url: process.env.DATABASE_URL,
+	database_user: process.env.DATABASE_USER,
+	database_password: process.env.DATABASE_PASSWORD,
+	database_name: process.env.DATABASE_NAME,
+	database_host: process.env.DATABASE_HOST,
+	database_port: process.env.DATABASE_PORT,
+};

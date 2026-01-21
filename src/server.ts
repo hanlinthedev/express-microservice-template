@@ -1,12 +1,12 @@
 import app from "@/app.js";
+import { ENV } from "@/constants/env.js";
 import { deregisterService, registerService } from "@/infra/consul.js";
 import { logger } from "@/infra/logger.js";
 import { prisma } from "@/infra/prisma.js";
 
-const PORT = Number(process.env.PORT) as number;
-const SERVICE_NAME = process.env.CONSUL_SERVICE_NAME as string;
-const IS_LOCAL =
-	process.env.NODE_ENV === "development" || process.env.LOCAL === "true";
+const PORT = Number(ENV.port) as number;
+const SERVICE_NAME = ENV.consul_service_name as string;
+const IS_LOCAL = ENV.node_env === "development" || process.env.LOCAL === "true";
 
 const server = app.listen(PORT, async () => {
 	logger.info(`🚀 Server running on port ${PORT}`);
@@ -14,7 +14,7 @@ const server = app.listen(PORT, async () => {
 	if (!IS_LOCAL) {
 		const instanceId = `${Math.floor(Math.random() * 10000)}`;
 
-		const portsEnv = process.env.CONSUL_SERVICE_PORTS;
+		const portsEnv = ENV.consul_service_ports;
 		const ports: number[] = portsEnv
 			? portsEnv
 					.split(",")
@@ -31,8 +31,8 @@ const server = app.listen(PORT, async () => {
 					id: serviceId,
 					name: SERVICE_NAME,
 					port: p,
-					checkInterval: process.env.CONSUL_CHECK_INTERVAL,
-					deregisterAfter: process.env.CONSUL_DEREGISTER_AFTER,
+					checkInterval: ENV.consul_check_interval,
+					deregisterAfter: ENV.consul_deregister_after,
 				});
 				registeredIds.push(serviceId);
 			} catch (err) {
