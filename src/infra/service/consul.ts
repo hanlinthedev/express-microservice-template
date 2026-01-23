@@ -1,5 +1,5 @@
 import { ENV } from "@/constants/env.js";
-import { logger } from "@/infra/logger.js";
+import { logger } from "@/infra/logger/logger.js";
 import os from "os";
 
 const CONSUL_HOST = ENV.consul_host || "127.0.0.1";

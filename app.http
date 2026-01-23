@@ -1,0 +1,4 @@
+@BASE_URL = http://localhost:3000/api
+
+GET {{BASE_URL}}/health
+x-correlation-id: afeeeeefeafre

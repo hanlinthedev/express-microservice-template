@@ -1,8 +1,8 @@
 import app from "@/app.js";
 import { ENV } from "@/constants/env.js";
-import { deregisterService, registerService } from "@/infra/consul.js";
-import { logger } from "@/infra/logger.js";
-import { prisma } from "@/infra/prisma.js";
+import { prisma } from "@/infra/database/prisma.js";
+import { logger } from "@/infra/logger/logger.js";
+import { deregisterService, registerService } from "@/infra/service/consul.js";
 
 const PORT = Number(ENV.port) as number;
 const SERVICE_NAME = ENV.consul_service_name as string;
